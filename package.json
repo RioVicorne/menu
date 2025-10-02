@@ -1,0 +1,23 @@
+{
+  "name": "sales-management-system",
+  "version": "1.0.0",
+  "description": "Hệ thống quản lý bán hàng",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "concurrently \"bun run server\" \"bun run client\"",
+    "server": "cd server && bun run dev",
+    "client": "cd client && bun start",
+    "build": "cd client && bun run build",
+    "install-all": "bun install && cd server && bun install && cd ../client && bun install"
+  },
+  "keywords": [
+    "sales",
+    "management",
+    "ecommerce"
+  ],
+  "author": "Khoa Tran",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
