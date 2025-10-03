@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Menu Store - Next.js Version
 
-## Getting Started
+Dự án cửa hàng trực tuyến được chuyển đổi từ React sang Next.js với App Router.
 
-First, run the development server:
+## 🚀 Tính năng
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js 15** với App Router
+- **TypeScript** cho type safety
+- **Material-UI** cho UI components
+- **Tailwind CSS** cho styling
+- **API Routes** cho backend
+- **Responsive Design**
+
+## 📁 Cấu trúc dự án
+
+```
+menu-nextjs/
+├── src/
+│   ├── app/                    # App Router
+│   │   ├── api/               # API routes
+│   │   │   └── products/      # Products API
+│   │   ├── cart/              # Cart page
+│   │   ├── wishlist/          # Wishlist page
+│   │   ├── product/[id]/      # Product detail page
+│   │   ├── layout.tsx         # Root layout
+│   │   └── page.tsx           # Home page
+│   ├── components/            # Reusable components
+│   ├── hooks/                 # Custom hooks
+│   └── contexts/              # React contexts
+├── server/                    # Backend server (SQLite)
+└── public/                    # Static assets
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Cài đặt và chạy
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Frontend (Next.js)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+cd menu-nextjs
+npm install
+npm run dev
+```
 
-## Learn More
+### Backend (Node.js)
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+cd server
+npm install
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🌐 URLs
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Frontend:** http://localhost:3000
+- **Backend:** http://localhost:5000
+- **API:** http://localhost:3000/api/products
 
-## Deploy on Vercel
+## 📱 Trang chính
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Trang chủ:** `/` - Hiển thị danh sách sản phẩm
+- **Giỏ hàng:** `/cart` - Quản lý giỏ hàng
+- **Yêu thích:** `/wishlist` - Danh sách sản phẩm yêu thích
+- **Chi tiết sản phẩm:** `/product/[id]` - Thông tin chi tiết sản phẩm
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔧 API Endpoints
+
+- `GET /api/products` - Lấy danh sách sản phẩm
+- `GET /api/products/categories` - Lấy danh mục sản phẩm
+
+## 🎨 Styling
+
+- **Material-UI** cho components
+- **Tailwind CSS** cho utility classes
+- **Custom theme** với màu sắc brand
+
+## 📦 Dependencies chính
+
+- `next` - Next.js framework
+- `react` - React library
+- `@mui/material` - Material-UI components
+- `@emotion/react` - CSS-in-JS
+- `axios` - HTTP client
+- `recharts` - Charts library
+
+## 🚧 Đang phát triển
+
+- [ ] Hoàn thiện trang giỏ hàng
+- [ ] Hoàn thiện trang yêu thích
+- [ ] Hoàn thiện trang chi tiết sản phẩm
+- [ ] Thêm authentication
+- [ ] Thêm checkout process
+- [ ] Thêm admin dashboard
+
+## 📝 Ghi chú
+
+Dự án này được chuyển đổi từ React Create React App sang Next.js để tận dụng:
+
+- Server-side rendering (SSR)
+- Static site generation (SSG)
+- API routes tích hợp
+- Performance tốt hơn
+- SEO friendly
