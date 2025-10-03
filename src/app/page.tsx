@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import {
   Box,
   Typography,
-  Grid,
   Card,
   CardContent,
   CardMedia,
@@ -475,9 +474,9 @@ export default function HomePage() {
               Món ăn ({sortedProducts.length})
             </Typography>
 
-            <Grid container spacing={3}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 3 }}>
               {sortedProducts.map((product) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
+                <Box key={product.id} sx={{ width: { xs: '100%', sm: 'calc(50% - 12px)', md: 'calc(33.333% - 16px)', lg: 'calc(25% - 18px)' } }}>
                   <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                     <CardMedia
                       component="div"
@@ -553,9 +552,9 @@ export default function HomePage() {
                       </Button>
                     </CardActions>
                   </Card>
-                </Grid>
+                </Box>
               ))}
-            </Grid>
+            </Box>
 
             {sortedProducts.length === 0 && !loading && (
               <Box textAlign="center" py={4}>
