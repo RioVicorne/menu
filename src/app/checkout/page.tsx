@@ -13,7 +13,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemSecondaryAction,
   IconButton,
   Alert,
   Stepper,
@@ -189,15 +188,11 @@ export default function CheckoutPage() {
             ) : (
               <List>
                 {cart.map((item) => (
-                  <ListItem key={item.product.id} divider>
-                    <ListItemText
-                      primary={item.product.name}
-                      secondary={`${formatCurrency(item.product.price)} x ${item.quantity}`}
-                    />
-                    <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
-                      {item.product.description}
-                    </Typography>
-                    <ListItemSecondaryAction>
+                  <ListItem
+                    key={item.product.id}
+                    divider
+                    alignItems="flex-start"
+                    secondaryAction={
                       <Box display="flex" alignItems="center" gap={1}>
                         <IconButton
                           size="small"
@@ -214,14 +209,28 @@ export default function CheckoutPage() {
                         >
                           <AddIcon />
                         </IconButton>
-                        <IconButton
-                          color="error"
-                          onClick={() => removeFromCart(item.product.id)}
-                        >
+                        <IconButton color="error" onClick={() => removeFromCart(item.product.id)}>
                           <DeleteIcon />
                         </IconButton>
                       </Box>
-                    </ListItemSecondaryAction>
+                    }
+                    sx={{ pr: 1 }}
+                  >
+                    <ListItemText
+                      primary={item.product.name}
+                      primaryTypographyProps={{ component: 'span' }}
+                      secondary={
+                        <>
+                          <Typography component="span" display="block" variant="body2" color="text.secondary">
+                            {`${formatCurrency(item.product.price)} x ${item.quantity}`}
+                          </Typography>
+                          <Typography component="span" display="block" variant="body2" color="text.secondary">
+                            {item.product.description}
+                          </Typography>
+                        </>
+                      }
+                      secondaryTypographyProps={{ component: 'span' }}
+                    />
                   </ListItem>
                 ))}
               </List>
