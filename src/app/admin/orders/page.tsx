@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Typography, Box, Card, CardContent, Grid, Chip, Button } from '@mui/material';
+import { Typography, Box, Card, CardContent, Chip, Button } from '@mui/material';
 import { Visibility as VisibilityIcon, Edit as EditIcon } from '@mui/icons-material';
 
 export default function OrdersPage() {
@@ -72,65 +72,56 @@ export default function OrdersPage() {
       </Box>
 
       {/* Stats Cards */}
-      <Grid container spacing={3} sx={{ mb: 3 }}>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card>
-            <CardContent>
-              <Typography color="textSecondary" gutterBottom>
-                Tổng đơn hàng
-              </Typography>
-              <Typography variant="h4">
-                {orders.length}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card>
-            <CardContent>
-              <Typography color="textSecondary" gutterBottom>
-                Chờ xử lý
-              </Typography>
-              <Typography variant="h4" color="warning.main">
-                {orders.filter(o => o.status === 'pending').length}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card>
-            <CardContent>
-              <Typography color="textSecondary" gutterBottom>
-                Đang xử lý
-              </Typography>
-              <Typography variant="h4" color="info.main">
-                {orders.filter(o => o.status === 'processing').length}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card>
-            <CardContent>
-              <Typography color="textSecondary" gutterBottom>
-                Hoàn thành
-              </Typography>
-              <Typography variant="h4" color="success.main">
-                {orders.filter(o => o.status === 'completed').length}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }, gap: 3, mb: 3 }}>
+        <Card>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Tổng đơn hàng
+            </Typography>
+            <Typography variant="h4">
+              {orders.length}
+            </Typography>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Chờ xử lý
+            </Typography>
+            <Typography variant="h4" color="warning.main">
+              {orders.filter(o => o.status === 'pending').length}
+            </Typography>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Đang xử lý
+            </Typography>
+            <Typography variant="h4" color="info.main">
+              {orders.filter(o => o.status === 'processing').length}
+            </Typography>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Hoàn thành
+            </Typography>
+            <Typography variant="h4" color="success.main">
+              {orders.filter(o => o.status === 'completed').length}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Box>
 
       {/* Orders List */}
       <Typography variant="h6" gutterBottom>
         Danh sách đơn hàng
       </Typography>
-      <Grid container spacing={2}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }, gap: 2 }}>
         {orders.map((order) => (
-          <Grid item xs={12} sm={6} md={4} key={order.id}>
-            <Card>
+          <Card key={order.id}>
               <CardContent>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
                   <Typography variant="h6" component="div">
@@ -138,7 +129,7 @@ export default function OrdersPage() {
                   </Typography>
                   <Chip 
                     label={getStatusText(order.status)} 
-                    color={getStatusColor(order.status) as any}
+                    color={getStatusColor(order.status) as "default" | "primary" | "secondary" | "error" | "info" | "success" | "warning"}
                     size="small"
                   />
                 </Box>
@@ -178,10 +169,9 @@ export default function OrdersPage() {
                   </Button>
                 </Box>
               </CardContent>
-            </Card>
-          </Grid>
+          </Card>
         ))}
-      </Grid>
+      </Box>
     </Box>
   );
 }

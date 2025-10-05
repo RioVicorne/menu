@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Typography, Box, Button, Card, CardContent, Grid } from '@mui/material';
+import { Typography, Box, Button, Card, CardContent } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import {
   Dashboard as DashboardIcon,
@@ -65,10 +65,9 @@ export default function AdminPage() {
       </Box>
 
       {/* Admin Cards */}
-      <Grid container spacing={3}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }, gap: 3 }}>
         {adminCards.map((card, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Card 
+            <Card key={index} 
               sx={{ 
                 height: '100%',
                 cursor: 'pointer',
@@ -112,9 +111,8 @@ export default function AdminPage() {
                 </Button>
               </CardContent>
             </Card>
-          </Grid>
         ))}
-      </Grid>
+      </Box>
 
       {/* Quick Actions */}
       <Box sx={{ mt: 4 }}>

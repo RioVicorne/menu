@@ -7,7 +7,6 @@ import {
   SlideProps,
 } from '@mui/material';
 import {
-  Favorite as FavoriteIcon,
   CheckCircle as CheckCircleIcon,
   Error as ErrorIcon,
   Info as InfoIcon,

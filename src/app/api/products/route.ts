@@ -70,16 +70,6 @@ const products = [
   }
 ];
 
-const categories = [
-  'Phở',
-  'Bún',
-  'Cơm',
-  'Bánh Mì',
-  'Món Đặc Biệt',
-  'Đồ Uống',
-  'Tráng Miệng',
-  'Món Chay'
-];
 
 export async function GET(request: NextRequest) {
   try {
@@ -90,7 +80,7 @@ export async function GET(request: NextRequest) {
     const maxPrice = parseFloat(searchParams.get('maxPrice') || '1000000');
     const sortBy = searchParams.get('sortBy') || 'name';
 
-    let filteredProducts = products.filter(product => {
+    const filteredProducts = products.filter(product => {
       const matchesSearch = !search || 
         product.name.toLowerCase().includes(search.toLowerCase()) ||
         product.description.toLowerCase().includes(search.toLowerCase());
@@ -117,7 +107,7 @@ export async function GET(request: NextRequest) {
     });
 
     return NextResponse.json(filteredProducts);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { message: 'Internal Server Error' },
       { status: 500 }

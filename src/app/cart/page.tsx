@@ -52,7 +52,7 @@ type CartItem = {
 
 export default function CartPage() {
   const router = useRouter();
-  const { notification, hideNotification, showSuccess, showError } = useNotification();
+  const { notification, hideNotification, showSuccess } = useNotification();
 
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -64,7 +64,7 @@ export default function CartPage() {
       if (savedCart) {
         setCartItems(JSON.parse(savedCart));
       }
-    } catch (err) {
+    } catch {
       setError('Không thể tải giỏ hàng');
     } finally {
       setLoading(false);

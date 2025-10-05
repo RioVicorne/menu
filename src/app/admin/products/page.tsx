@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Typography, Box, Button, Card, CardContent, Grid, Chip } from '@mui/material';
+import { Typography, Box, Button, Card, CardContent, Chip } from '@mui/material';
 import { Add as AddIcon, Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 
 export default function ProductsPage() {
@@ -80,65 +80,56 @@ export default function ProductsPage() {
       </Box>
 
       {/* Stats Cards */}
-      <Grid container spacing={3} sx={{ mb: 3 }}>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card>
-            <CardContent>
-              <Typography color="textSecondary" gutterBottom>
-                Tổng món ăn
-              </Typography>
-              <Typography variant="h4">
-                {products.length}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card>
-            <CardContent>
-              <Typography color="textSecondary" gutterBottom>
-                Đang hoạt động
-              </Typography>
-              <Typography variant="h4" color="success.main">
-                {products.filter(p => p.status === 'active').length}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card>
-            <CardContent>
-              <Typography color="textSecondary" gutterBottom>
-                Hết món
-              </Typography>
-              <Typography variant="h4" color="error.main">
-                {products.filter(p => p.stock === 0).length}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card>
-            <CardContent>
-              <Typography color="textSecondary" gutterBottom>
-                Tổng giá trị
-              </Typography>
-              <Typography variant="h4" color="primary.main">
-                {formatCurrency(products.reduce((sum, p) => sum + (p.price * p.stock), 0))}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }, gap: 3, mb: 3 }}>
+        <Card>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Tổng món ăn
+            </Typography>
+            <Typography variant="h4">
+              {products.length}
+            </Typography>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Đang hoạt động
+            </Typography>
+            <Typography variant="h4" color="success.main">
+              {products.filter(p => p.status === 'active').length}
+            </Typography>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Hết món
+            </Typography>
+            <Typography variant="h4" color="error.main">
+              {products.filter(p => p.stock === 0).length}
+            </Typography>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Tổng giá trị
+            </Typography>
+            <Typography variant="h4" color="primary.main">
+              {formatCurrency(products.reduce((sum, p) => sum + (p.price * p.stock), 0))}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Box>
 
       {/* Products List */}
       <Typography variant="h6" gutterBottom>
         Danh sách món ăn
       </Typography>
-      <Grid container spacing={2}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }, gap: 2 }}>
         {products.map((product) => (
-          <Grid item xs={12} sm={6} md={4} key={product.id}>
-            <Card>
+          <Card key={product.id}>
               <CardContent>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
                   <Typography variant="h6" component="div">
@@ -183,10 +174,9 @@ export default function ProductsPage() {
                   </Button>
                 </Box>
               </CardContent>
-            </Card>
-          </Grid>
+          </Card>
         ))}
-      </Grid>
+      </Box>
     </Box>
   );
 }

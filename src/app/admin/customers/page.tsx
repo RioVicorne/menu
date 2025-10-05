@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Typography, Box, Card, CardContent, Grid, Chip, Button, Avatar } from '@mui/material';
+import { Typography, Box, Card, CardContent, Chip, Button, Avatar } from '@mui/material';
 import { Email as EmailIcon, Phone as PhoneIcon, Visibility as VisibilityIcon } from '@mui/icons-material';
 
 export default function CustomersPage() {
@@ -62,65 +62,56 @@ export default function CustomersPage() {
       </Box>
 
       {/* Stats Cards */}
-      <Grid container spacing={3} sx={{ mb: 3 }}>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card>
-            <CardContent>
-              <Typography color="textSecondary" gutterBottom>
-                Tổng khách hàng
-              </Typography>
-              <Typography variant="h4">
-                {customers.length}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card>
-            <CardContent>
-              <Typography color="textSecondary" gutterBottom>
-                Khách hàng hoạt động
-              </Typography>
-              <Typography variant="h4" color="success.main">
-                {customers.filter(c => c.status === 'active').length}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card>
-            <CardContent>
-              <Typography color="textSecondary" gutterBottom>
-                Khách hàng mới
-              </Typography>
-              <Typography variant="h4" color="info.main">
-                {customers.filter(c => new Date(c.joinDate) > new Date('2024-01-01')).length}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card>
-            <CardContent>
-              <Typography color="textSecondary" gutterBottom>
-                Tổng doanh thu
-              </Typography>
-              <Typography variant="h4" color="primary.main">
-                {formatCurrency(customers.reduce((sum, c) => sum + c.totalSpent, 0))}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' }, gap: 3, mb: 3 }}>
+        <Card>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Tổng khách hàng
+            </Typography>
+            <Typography variant="h4">
+              {customers.length}
+            </Typography>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Khách hàng hoạt động
+            </Typography>
+            <Typography variant="h4" color="success.main">
+              {customers.filter(c => c.status === 'active').length}
+            </Typography>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Khách hàng mới
+            </Typography>
+            <Typography variant="h4" color="info.main">
+              {customers.filter(c => new Date(c.joinDate) > new Date('2024-01-01')).length}
+            </Typography>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent>
+            <Typography color="textSecondary" gutterBottom>
+              Tổng doanh thu
+            </Typography>
+            <Typography variant="h4" color="primary.main">
+              {formatCurrency(customers.reduce((sum, c) => sum + c.totalSpent, 0))}
+            </Typography>
+          </CardContent>
+        </Card>
+      </Box>
 
       {/* Customers List */}
       <Typography variant="h6" gutterBottom>
         Danh sách khách hàng
       </Typography>
-      <Grid container spacing={2}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' }, gap: 2 }}>
         {customers.map((customer) => (
-          <Grid item xs={12} sm={6} md={4} key={customer.id}>
-            <Card>
+          <Card key={customer.id}>
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                   <Avatar sx={{ mr: 2, bgcolor: 'primary.main' }}>
@@ -170,10 +161,9 @@ export default function CustomersPage() {
                   Xem chi tiết
                 </Button>
               </CardContent>
-            </Card>
-          </Grid>
+          </Card>
         ))}
-      </Grid>
+      </Box>
     </Box>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Box,
   Typography,
@@ -75,13 +75,6 @@ export default function HomePage() {
   const [error, setError] = useState('');
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  useEffect(() => {
-    fetchProducts();
-    fetchCategories();
-    loadCart();
-    loadWishlist();
-  }, []);
-
   const loadCart = () => {
     try {
       const savedCart = localStorage.getItem('cart');
@@ -98,14 +91,14 @@ export default function HomePage() {
       const savedWishlist = localStorage.getItem('wishlist');
       if (savedWishlist) {
         const wishlistData = JSON.parse(savedWishlist);
-        setWishlist(wishlistData.map((item: any) => item.product));
+        setWishlist(wishlistData.map((item: { product: Product }) => item.product));
       }
     } catch (err) {
       console.error('Failed to load wishlist:', err);
     }
   };
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       const params = new URLSearchParams();
       if (searchTerm) params.append('search', searchTerm);
@@ -116,18 +109,26 @@ export default function HomePage() {
 
       const response = await axios.get(`/api/products?${params}`);
       setProducts(response.data);
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to fetch products');
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch products';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
-  };
+  }, [searchTerm, categoryFilter, priceRange, sortBy]);
+
+  useEffect(() => {
+    fetchProducts();
+    fetchCategories();
+    loadCart();
+    loadWishlist();
+  }, [fetchProducts]);
 
   const fetchCategories = async () => {
     try {
       const response = await axios.get('/api/products/categories');
       setCategories(response.data);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Error fetching categories:', err);
     }
   };

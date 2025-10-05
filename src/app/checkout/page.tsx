@@ -6,7 +6,6 @@ import {
   Typography,
   Card,
   CardContent,
-  Grid,
   TextField,
   Button,
   Divider,
@@ -22,9 +21,7 @@ import {
   FormControlLabel,
   Radio,
   FormControl,
-  FormLabel,
-  Paper,
-  Chip
+  Paper
 } from '@mui/material';
 import {
   Delete as DeleteIcon,
@@ -108,9 +105,6 @@ export default function CheckoutPage() {
     updateCart(updatedCart);
   };
 
-  const getTotalItems = () => {
-    return cart.reduce((total, item) => total + item.quantity, 0);
-  };
 
   const getTotalPrice = () => {
     return cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
@@ -244,56 +238,48 @@ export default function CheckoutPage() {
             <Typography variant="h6" gutterBottom>
               Thông tin khách hàng
             </Typography>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  label="Họ và tên *"
-                  value={customerInfo.name}
-                  onChange={(e) => setCustomerInfo(prev => ({ ...prev, name: e.target.value }))}
-                  required
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  label="Số điện thoại *"
-                  value={customerInfo.phone}
-                  onChange={(e) => setCustomerInfo(prev => ({ ...prev, phone: e.target.value }))}
-                  required
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  fullWidth
-                  label="Email"
-                  type="email"
-                  value={customerInfo.email}
-                  onChange={(e) => setCustomerInfo(prev => ({ ...prev, email: e.target.value }))}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Địa chỉ"
-                  multiline
-                  rows={2}
-                  value={customerInfo.address}
-                  onChange={(e) => setCustomerInfo(prev => ({ ...prev, address: e.target.value }))}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Ghi chú"
-                  multiline
-                  rows={2}
-                  value={customerInfo.note}
-                  onChange={(e) => setCustomerInfo(prev => ({ ...prev, note: e.target.value }))}
-                  placeholder="Yêu cầu đặc biệt cho món ăn..."
-                />
-              </Grid>
-            </Grid>
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)' }, gap: 3 }}>
+              <TextField
+                fullWidth
+                label="Họ và tên *"
+                value={customerInfo.name}
+                onChange={(e) => setCustomerInfo(prev => ({ ...prev, name: e.target.value }))}
+                required
+              />
+              <TextField
+                fullWidth
+                label="Số điện thoại *"
+                value={customerInfo.phone}
+                onChange={(e) => setCustomerInfo(prev => ({ ...prev, phone: e.target.value }))}
+                required
+              />
+              <TextField
+                fullWidth
+                label="Email"
+                type="email"
+                value={customerInfo.email}
+                onChange={(e) => setCustomerInfo(prev => ({ ...prev, email: e.target.value }))}
+              />
+              <TextField
+                fullWidth
+                label="Địa chỉ"
+                multiline
+                rows={2}
+                value={customerInfo.address}
+                onChange={(e) => setCustomerInfo(prev => ({ ...prev, address: e.target.value }))}
+                sx={{ gridColumn: { xs: '1 / -1', sm: '1 / -1' } }}
+              />
+              <TextField
+                fullWidth
+                label="Ghi chú"
+                multiline
+                rows={2}
+                value={customerInfo.note}
+                onChange={(e) => setCustomerInfo(prev => ({ ...prev, note: e.target.value }))}
+                placeholder="Yêu cầu đặc biệt cho món ăn..."
+                sx={{ gridColumn: { xs: '1 / -1', sm: '1 / -1' } }}
+              />
+            </Box>
 
             <Divider sx={{ my: 3 }} />
 
